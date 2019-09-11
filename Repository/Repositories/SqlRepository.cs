@@ -1,6 +1,8 @@
 ﻿using DataAccess;
-using Domain.Entities;
+using DataAccess.Models;
 using Domain.Interfaces;
+using Domain.Interfaces.DbObjects;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,9 +19,12 @@ namespace Repository.Repositories
             this.context = context;
         }
 
-        public IEnumerable<Company> GetCompanies()
+        public IEnumerable<ICompany> GetCompanies()
         {
-            var companies = context.Company;
+            var companies = context.Company
+                .Include(x => x.IdAddressNavigation)
+                .Include(x => x.AspNetUsers)
+                .ToList();
             return companies;
         }
     }

@@ -3,10 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Domain.Interfaces
+namespace DataAccess.Models
 {
-    public interface IRepository
+    public partial class Company : ICompany
     {
-        IEnumerable<ICompany> GetCompanies();
     }
 }

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Domain.Entities;
 using Domain.Interfaces;
+using Domain.Interfaces.DbObjects;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebServices.Controllers
@@ -20,8 +20,8 @@ namespace WebServices.Controllers
         }
 
         //GET api/values
-        [HttpGet]
-        public IEnumerable<Company> Get()
+        [HttpGet("GetCompanies")]
+        public IEnumerable<ICompany> GetCompanies()
         {
             //return new string[] { "value1", "value2" };
             return Repository.GetCompanies();

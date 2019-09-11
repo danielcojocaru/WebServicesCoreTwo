@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DataAccess;
+using DataAccess.Models;
 using Domain.Enums;
 using Domain.Interfaces;
 using Microsoft.AspNetCore.Builder;
@@ -35,7 +36,11 @@ namespace WebServices
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddJsonOptions(
+                    options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
 
             services.AddDbContextPool<SchoolsAndCreatorContext>(options => 
                 options.UseSqlServer(Configuration.GetConnectionString(ConnectionStrings.SchoolsAndCreatorConnection))
